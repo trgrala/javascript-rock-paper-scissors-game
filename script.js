@@ -4,9 +4,13 @@ const playerScoreMsg = document.querySelector('#playerScore');
 const computerScoreMsg = document.querySelector('#computerScore');
 const playerIcon = document.querySelector('#playerIcon');
 const computerIcon = document.querySelector('#computerIcon');
-const roundMsg = document.querySelector('#roundMsg');
 const gameMsg = document.querySelector('#gameMsg');
-const winMsg = document.querySelector('#winMsg');
+
+const resetButton = document.querySelector('#resetButton')
+    resetButton.addEventListener('click', (e) => {
+        resetGame();
+    });
+
 
 const buttons = document.querySelectorAll(".btn-choice");
 
@@ -26,11 +30,17 @@ function getComputerChoice(){
     return choice[random];
 }
 
+function setGameMsg(text, className){
+    gameMsg.textContent = text;
+    gameMsg.classList.remove('win','lose','tie');
+    gameMsg.classList.add(className);
+}
+
 function playRound(playerChoice,computerChoice){
     console.log('Player vs Computer');
 
     if(playerChoice===computerChoice)
-        roundMsg.textContent = "It's a TIE!";
+        setGameMsg('TIE!', 'tie')
 
         // console.log('Tie!');
     else if(
@@ -38,9 +48,9 @@ function playRound(playerChoice,computerChoice){
         (playerChoice === 'PAPER' && computerChoice === 'ROCK') ||
         (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')
     ){
-        playerIcon.textContent = 'Player choice:'+playerChoice;
-        computerIcon.textContent = 'Computer choice:'+computerChoice;
-        roundMsg.textContent = 'Player Wins!';
+        playerIcon.textContent = playerChoice;
+        computerIcon.textContent = computerChoice;
+        setGameMsg('YOU WIN!','win');
         playerScore++
         playerScoreMsg.textContent = playerScore;
 
@@ -51,9 +61,9 @@ function playRound(playerChoice,computerChoice){
         // playerScore++
     }
     else{
-        playerIcon.textContent = 'Player choice:'+playerChoice;
-        computerIcon.textContent = 'Computer choice:'+computerChoice;
-        roundMsg.textContent = 'Computer Wins!';
+        playerIcon.textContent = playerChoice;
+        computerIcon.textContent = computerChoice;
+        setGameMsg('YOU LOSE!','lose');
         computerScore++
         computerScoreMsg.textContent = computerScore;
 
@@ -64,15 +74,41 @@ function playRound(playerChoice,computerChoice){
         // computerScore++
     }
 
-    gameMsg.textContent = 'Player Score: '+playerScore+' | '+'Computer Score: '+computerScore;
+
+    // gameMsg.textContent = 'Player Score: '+playerScore+' | '+'Computer Score: '+computerScore;
 
     isGameOver();
 }
 
 function isGameOver(){
     if(playerScore === 5){
-        winMsg.textContent = 'Player wins the game!';
+        setGameMsg('YOU WON THE GAME!','win');
+        disableButtons();
     }else if(computerScore === 5){
-        winMsg.textContent = 'Computer wins the game!';
+        setGameMsg('YOU LOST THE GAME!','lose');
+        disableButtons();
     }
+}
+
+function disableButtons(){
+    buttons.forEach(btn => {
+        btn.disabled = true;
+    })
+    resetButton.classList.remove('hidden');
+}
+
+function resetGame(){
+
+    buttons.forEach(btn => {
+    btn.disabled = false;
+    })
+    
+    resetButton.classList.add('hidden');
+    playerScore=0;
+    computerScore=0;
+
+    playerScoreMsg.textContent = '0';
+    computerScoreMsg.textContent = '0';
+
+    setGameMsg('MAKE YOUR CHOICE','');
 }

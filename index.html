@@ -7,20 +7,42 @@
     <title>JavaScript - Rock Paper Scissors</title>
 </head>
 <body>
-    <button data-choice="ROCK" class="btn-choice">🪨</button>
-    <button data-choice="PAPER" class="btn-choice">🖐</button>
-    <button data-choice="SCISSORS" class="btn-choice">✌</button>
-
-    <div id="playerScore">0</div>
-    <div id="computerScore">0</div>
-
-    <div id="playerIcon">💀</div>
-    <div id="computerIcon">💀</div>
-
+    <H1>ROCK PAPER SCISSORS</H1>
+    <div class="center-box">
+        <div class="score-wrapper">
+            <div class="pScoreBox">
+                <p>Player Score:&nbsp;</p>
+                <div id="playerScore">0</div>
+            </div>
+            <div class="cScoreBox">
+                <p>Computer Score:&nbsp;</p>
+                <div id="computerScore">0</div>
+            </div>
+        </div>
+        <div class="buttons-wrapper">
+            <button data-choice="ROCK" class="btn-choice">🪨</button>
+            <button data-choice="PAPER" class="btn-choice">🖐</button>
+            <button data-choice="SCISSORS" class="btn-choice">✌</button>
+        </div>
+        <div class="msg-wrapper">
+            <div class="pMsgBox">
+                <p>You choose:&nbsp;</p>
+                <div id="playerIcon">PAPER</div>
+            </div>
+            <div class="cMsgBox">
+                <p>Computer choose:&nbsp;</p>
+                <div id="computerIcon">SCISSORS</div>
+            </div>
+            <div class="resetBox">
+                <div id="gameMsg">MAKE YOUR CHOICE</div>
+                <button id="resetButton" class="hidden">RESET GAME</button>
+            </div>
+        </div>
+    </div>
+<!-- 
     <div id="roundMsg">Make your choice!</div>
     <div id="gameMsg"></div>
-    <div id="winMsg"></div>
-
+    <div id="winMsg"></div> -->
 
     <script src="script.js">
     </script>
